@@ -1,0 +1,33 @@
+/* Base styles for your application */
+$primary-background-color: #ffffff;
+$primary-text-color: palevioletred;
+$primary-font-family: 'Arial', sans-serif;
+
+
+/* Style for the main content area */
+.main-content {
+  transition: margin-left 0.3s; /* Transition effect */
+  margin-left: 0; /* Default margin-left value */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  color: $primary-text-color; /* Set text color */
+  font-family: $primary-font-family; /* Set font family */
+
+}
+
+/* Style for the overlay backdrop when the drawer is open */
+.MuiBackdrop-root {
+  z-index: 0;
+}
+
+/* Style to push the main content when the drawer is open */
+.drawer-open .main-content {
+  margin-left: 225px; /* Adjust the value as needed */
+}
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root{
+  background-color:#acbcff;
+
+}
+.header{
+  background-color: #acbcff;
+}
