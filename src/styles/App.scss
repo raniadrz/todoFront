@@ -21,13 +21,34 @@ $primary-font-family: 'Arial', sans-serif;
 
 /* Style to push the main content when the drawer is open */
 .drawer-open .main-content {
-  margin-left: 225px; /* Adjust the value as needed */
+  margin-left: 220px; /* Adjust the value as needed */
 }
 
-.css-hip9hq-MuiPaper-root-MuiAppBar-root{
-  background-color:#acbcff;
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionStatic.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  background-color: #b6c5fe;
+}
+
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
+  border-right: 1px solid rgba(172, 188, 255, 1);
+}
+
+.MuiDrawer-paper {
+  background-color: #b6c5fe !important;
+  border-right: 1px solid #b6c5fe !important;
 
 }
-.header{
-  background-color: #acbcff;
+.css-5wly58-MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
+  background-color: #b1bef44f  !important;
+}
+.css-yrdy0g-MuiDataGrid-columnHeaderRow {
+  background-color: rgba(216, 181, 245, 0.315) !important;
+}
+.css-1ps6pg7-MuiPaper-root {
+  height: 100% !important;
+}
+.logoAppBar{
+  img {
+    width: 210px;
+    background: transparent !important
+  }
 }

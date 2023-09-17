@@ -1,37 +1,30 @@
-import React from "react";
-import {
-  Route,
-  Routes,
-  Link,
-  useLocation,
-  BrowserRouter as Router,
-} from "react-router-dom";
+import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
+import MenuIcon from '@mui/icons-material/Menu';
+import PasswordIcon from '@mui/icons-material/Password';
+import TimerIcon from '@mui/icons-material/Timer';
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemButton from "@mui/material/ListItemButton";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
-import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from "@mui/material/Toolbar";
+import React from "react";
+import {
+  Link,
+  Route,
+  Routes
+} from "react-router-dom";
+import PasswordGenerator from "./components/PasswordGenerator";
 import TodoList1 from "./components/SimpleTodo";
 import TodoList2 from "./components/TodoDataG";
 import Time from "./components/timer";
-import "./styles/App.scss"; 
-import TimerIcon from '@mui/icons-material/Timer';
-
-
-
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-
-
+import logo from "./photos/logo.png";
+import "./styles/App.scss";
 const App = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -46,8 +39,15 @@ const App = () => {
           aria-label="close drawer"
         >
         </IconButton>
-      </div> 
-      <Toolbar />
+      </div>
+      <div className="logoAppBar">
+        <img
+          alt="logo"
+          className="logo-icon"
+          src={logo}
+        />
+      </div>
+      {/* <Toolbar /> */}
       <List >
         {/* TODO ONE HERE*/}
         <ListItem component={Link} to="/list1">
@@ -72,13 +72,23 @@ const App = () => {
         </ListItem>
         <Divider />
 
-        {/* TIMER TWO HERE*/}
+        {/* TIMER HERE*/}
         <ListItem component={Link} to="/Time">
         <ListItemButton>
           <ListItemIcon>
             <TimerIcon/>
           </ListItemIcon>
           <ListItemText primary="Timer" />
+        </ListItemButton>
+        </ListItem>
+
+         {/* Password HERE*/}
+         <ListItem component={Link} to="/PasswordGenerator">
+        <ListItemButton>
+          <ListItemIcon>
+            <PasswordIcon/>
+          </ListItemIcon>
+          <ListItemText primary="Generator" />
         </ListItemButton>
         </ListItem>
       </List>
@@ -139,25 +149,19 @@ const App = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography>Menu</Typography>
+            {/* <Typography>Menu</Typography> */}
           </Box>
         </Box>
           </Toolbar>
          </AppBar>
         </Box>
       </Box>
-
       <Box sx={{ display: "flex" }}>
         {/* Side Navigation Drawer */}
         <Drawer
           anchor="left"
           open={isDrawerOpen}
           variant="persistent"
-          PaperProps={{
-            style: {
-              backgroundColor: '#ACBCFF',
-            },
-          }}
         >
           {drawer}
         </Drawer>
@@ -176,6 +180,7 @@ const App = () => {
             <Route path="/list1" element={<TodoList1 />} />
             <Route path="/list2" element={<TodoList2 />} />
             <Route path="/Time" element={<Time />} />
+            <Route path="/PasswordGenerator" element={<PasswordGenerator />} />
           </Routes>
         </Box>
       </Box>

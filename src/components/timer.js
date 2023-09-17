@@ -1,44 +1,47 @@
-import {Component} from 'react'
-import '../styles/timer.scss'
+import { Component } from 'react';
+import '../styles/timer.scss';
 
+import pause from '../photos/pause-icon-img.png';
+import play from '../photos/play-icon-img.png';
+import reset from '../photos/reset-icon-img.png';
 
-import reset from "../photos/reset-icon-img.png";
-import pause from "../photos/pause-icon-img.png";
-import play from "../photos/play-icon-img.png";
+// Import your end sound
+import endSound from '../sounds/timer.mp3'; // Replace with the actual path
 
 const initialState = {
   isTimerRunning: false,
   timeElapsedInSeconds: 0,
   timerLimitInMinutes: 25,
-}
+  timerFinished: false, // Add this variable
+};
 
 class DigitalTimer extends Component {
-  state = initialState
+  state = initialState;
 
   componentWillUnmount() {
-    this.clearTimerInterval()
+    this.clearTimerInterval();
   }
 
-  clearTimerInterval = () => clearInterval(this.intervalId)
+  clearTimerInterval = () => clearInterval(this.intervalId);
 
   onDecreaseTimerLimitInMinutes = () => {
-    const {timerLimitInMinutes} = this.state
+    const { timerLimitInMinutes } = this.state;
 
     if (timerLimitInMinutes > 1) {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         timerLimitInMinutes: prevState.timerLimitInMinutes - 1,
-      }))
+      }));
     }
-  }
+  };
 
   onIncreaseTimerLimitInMinutes = () =>
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       timerLimitInMinutes: prevState.timerLimitInMinutes + 1,
-    }))
+    }));
 
   renderTimerLimitController = () => {
-    const {timerLimitInMinutes, timeElapsedInSeconds} = this.state
-    const isButtonsDisabled = timeElapsedInSeconds > 0
+    const { timerLimitInMinutes, timeElapsedInSeconds } = this.state;
+    const isButtonsDisabled = timeElapsedInSeconds > 0;
 
     return (
       <div className="timer-limit-controller-container">
@@ -65,52 +68,53 @@ class DigitalTimer extends Component {
           </button>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   onResetTimer = () => {
-    this.clearTimerInterval()
-    this.setState(initialState)
-  }
+    this.clearTimerInterval();
+    this.setState(initialState);
+  };
 
   incrementTimeElapsedInSeconds = () => {
-    const {timerLimitInMinutes, timeElapsedInSeconds} = this.state
-    const isTimerCompleted = timeElapsedInSeconds === timerLimitInMinutes * 60
+    const { timerLimitInMinutes, timeElapsedInSeconds } = this.state;
+    const isTimerCompleted = timeElapsedInSeconds === timerLimitInMinutes * 60;
 
     if (isTimerCompleted) {
-      this.clearTimerInterval()
-      this.setState({isTimerRunning: false})
+      this.clearTimerInterval();
+      this.setState({ isTimerRunning: false, timerFinished: true }, () => {
+        // Play the end sound when the timer finishes
+        const audio = new Audio(endSound);
+        audio.play();
+      });
     } else {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         timeElapsedInSeconds: prevState.timeElapsedInSeconds + 1,
-      }))
+      }));
     }
-  }
+  };
 
   onStartOrPauseTimer = () => {
-    const {
-      isTimerRunning,
-      timeElapsedInSeconds,
-      timerLimitInMinutes,
-    } = this.state
-    const isTimerCompleted = timeElapsedInSeconds === timerLimitInMinutes * 60
+    const { isTimerRunning, timeElapsedInSeconds, timerLimitInMinutes } =
+      this.state;
+    const isTimerCompleted = timeElapsedInSeconds === timerLimitInMinutes * 60;
 
     if (isTimerCompleted) {
-      this.setState({timeElapsedInSeconds: 0})
+      this.setState({ timeElapsedInSeconds: 0 });
     }
     if (isTimerRunning) {
-      this.clearTimerInterval()
+      this.clearTimerInterval();
     } else {
-      this.intervalId = setInterval(this.incrementTimeElapsedInSeconds, 1000)
+      this.intervalId = setInterval(this.incrementTimeElapsedInSeconds, 1000);
     }
-    this.setState(prevState => ({isTimerRunning: !prevState.isTimerRunning}))
-  }
+    this.setState((prevState) => ({ isTimerRunning: !prevState.isTimerRunning }));
+  };
 
-    renderTimerController = () => {
-        const { isTimerRunning } = this.state;
-        const startOrPauseImageUrl = isTimerRunning ? pause : play;
-        const startOrPauseAltText = isTimerRunning ? 'pause icon' : 'play icon';
-    
+  renderTimerController = () => {
+    const { isTimerRunning } = this.state;
+    const startOrPauseImageUrl = isTimerRunning ? pause : play;
+    const startOrPauseAltText = isTimerRunning ? 'pause icon' : 'play icon';
+
     return (
       <div className="timer-controller-container">
         <button
@@ -132,32 +136,27 @@ class DigitalTimer extends Component {
           onClick={this.onResetTimer}
           type="button"
         >
-          <img
-            alt="reset icon"
-            className="timer-controller-icon"
-            src={reset}
-          />
+          <img alt="reset icon" className="timer-controller-icon" src={reset} />
           <p className="timer-controller-label">Reset</p>
         </button>
       </div>
-    )
-  }
+    );
+  };
 
   getElapsedSecondsInTimeFormat = () => {
-    const {timerLimitInMinutes, timeElapsedInSeconds} = this.state
-    const totalRemainingSeconds =
-      timerLimitInMinutes * 60 - timeElapsedInSeconds
-    const minutes = Math.floor(totalRemainingSeconds / 60)
-    const seconds = Math.floor(totalRemainingSeconds % 60)
-    const stringifiedMinutes = minutes > 9 ? minutes : `0${minutes}`
-    const stringifiedSeconds = seconds > 9 ? seconds : `0${seconds}`
+    const { timerLimitInMinutes, timeElapsedInSeconds } = this.state;
+    const totalRemainingSeconds = timerLimitInMinutes * 60 - timeElapsedInSeconds;
+    const minutes = Math.floor(totalRemainingSeconds / 60);
+    const seconds = Math.floor(totalRemainingSeconds % 60);
+    const stringifiedMinutes = minutes > 9 ? minutes : `0${minutes}`;
+    const stringifiedSeconds = seconds > 9 ? seconds : `0${seconds}`;
 
-    return `${stringifiedMinutes}:${stringifiedSeconds}`
-  }
+    return `${stringifiedMinutes}:${stringifiedSeconds}`;
+  };
 
   render() {
-    const {isTimerRunning} = this.state
-    const labelText = isTimerRunning ? 'Running' : 'Paused'
+    const { isTimerRunning, timerFinished } = this.state;
+    const labelText = isTimerRunning ? 'Running' : 'Paused';
 
     return (
       <div className="app-container">
@@ -168,7 +167,8 @@ class DigitalTimer extends Component {
               <h1 className="elapsed-time">
                 {this.getElapsedSecondsInTimeFormat()}
               </h1>
-              <p className="timer-state">{labelText}</p>
+              {timerFinished && <p className="timer-state">Timer Finished!</p>}
+              {!timerFinished && <p className="timer-state">{labelText}</p>}
             </div>
           </div>
           <div className="controls-container">
@@ -177,8 +177,8 @@ class DigitalTimer extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default DigitalTimer
+export default DigitalTimer;
