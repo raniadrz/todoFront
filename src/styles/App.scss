@@ -49,6 +49,10 @@ $primary-font-family: 'Arial', sans-serif;
 .logoAppBar{
   img {
     width: 210px;
-    background: transparent !important
+    background: transparent !important;
+    position: absolute;
+    bottom: 20px; /* Adjust the value to control the logo's vertical position */
+    left: 50%; /* Center the logo horizontally */
+    transform: translateX(-50%);
   }
 }
