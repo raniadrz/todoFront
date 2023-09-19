@@ -13,6 +13,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
+import BarChartIcon from '@mui/icons-material/BarChart';
 import React from "react";
 import {
   Link,
@@ -89,6 +90,15 @@ const App = () => {
             <PasswordIcon/>
           </ListItemIcon>
           <ListItemText primary="Generator" />
+        </ListItemButton>
+        </ListItem>
+          {/* DATA HERE*/}
+        <ListItem component={Link} to="/data">
+        <ListItemButton>
+          <ListItemIcon>
+            <BarChartIcon />
+          </ListItemIcon>
+          <ListItemText primary="Data" />
         </ListItemButton>
         </ListItem>
       </List>
