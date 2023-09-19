@@ -56,3 +56,60 @@ $primary-font-family: 'Arial', sans-serif;
     transform: translateX(-50%);
   }
 }
+/* Add this CSS for mobile devices */
+@media (max-width: 600px) {
+  .hide-on-mobile {
+    display: none;
+  }
+  .drawer-open .main-content {
+    margin-left: 120px; /* Adjust the value as needed */
+  }
+  .logoAppBar{
+    img {
+      width: 110px;
+      background: transparent !important;
+      position: absolute;
+      bottom: 10px; /* Adjust the value to control the logo's vertical position */
+      left: 50%; /* Center the logo horizontally */
+      transform: translateX(-50%);
+    }
+  }
+  .icons{
+    margin-left: 30%;
+    width: 30px;
+  }
+  /* Default styles for larger screens */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.dj {
+  margin-top: 20px;
+  max-width: 100%;
+}
+
+  .form {
+    padding: 10px;
+  }
+
+  .MuiTextField-root {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  /* Adjust button style for smaller screens */
+  .MuiButton-root {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Make the data grid responsive */
+  .dj {
+    overflow-x: auto;
+    padding-top: 10px;
+  }
+
+}

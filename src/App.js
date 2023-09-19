@@ -1,3 +1,4 @@
+import BarChartIcon from '@mui/icons-material/BarChart';
 import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import MenuIcon from '@mui/icons-material/Menu';
 import PasswordIcon from '@mui/icons-material/Password';
@@ -13,7 +14,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
-import BarChartIcon from '@mui/icons-material/BarChart';
 import React from "react";
 import {
   Link,
@@ -23,6 +23,7 @@ import {
 import PasswordGenerator from "./components/PasswordGenerator";
 import TodoList1 from "./components/SimpleTodo";
 import TodoList2 from "./components/TodoDataG";
+import Data from './components/data';
 import Time from "./components/timer";
 import logo from "./photos/logo.png";
 import "./styles/App.scss";
@@ -48,27 +49,25 @@ const App = () => {
           src={logo}
         />
       </div>
-      {/* <Toolbar /> */}
+      <Toolbar />
       <List >
         {/* TODO ONE HERE*/}
         <ListItem component={Link} to="/list1">
         <ListItemButton>
-          <ListItemIcon>
+          <ListItemIcon className='icons'>
             <ChecklistRtlIcon />
           </ListItemIcon>
-          <ListItemText primary="Todo List One" />
+          <ListItemText primary="Todo List One"className="hide-on-mobile" />
         </ListItemButton>
         </ListItem>
-      
-      
 
         {/* TODO TWO HERE*/}
         <ListItem component={Link} to="/list2">
         <ListItemButton>
-          <ListItemIcon>
+          <ListItemIcon className='icons'>
             <ChecklistRtlIcon />
           </ListItemIcon>
-          <ListItemText primary="Todo List Two" />
+          <ListItemText primary="Todo List Two" className="hide-on-mobile"/>
         </ListItemButton>
         </ListItem>
         <Divider />
@@ -76,29 +75,30 @@ const App = () => {
         {/* TIMER HERE*/}
         <ListItem component={Link} to="/Time">
         <ListItemButton>
-          <ListItemIcon>
-            <TimerIcon/>
+          <ListItemIcon className='icons'>
+            <TimerIcon />
           </ListItemIcon>
-          <ListItemText primary="Timer" />
+          <ListItemText primary="Timer" className="hide-on-mobile"/>
         </ListItemButton>
         </ListItem>
 
          {/* Password HERE*/}
          <ListItem component={Link} to="/PasswordGenerator">
         <ListItemButton>
-          <ListItemIcon>
-            <PasswordIcon/>
+          <ListItemIcon className='icons'>
+            <PasswordIcon />
           </ListItemIcon>
-          <ListItemText primary="Generator" />
+          <ListItemText primary="Generator" className="hide-on-mobile"/>
         </ListItemButton>
         </ListItem>
+
           {/* DATA HERE*/}
         <ListItem component={Link} to="/data">
         <ListItemButton>
-          <ListItemIcon>
+          <ListItemIcon className='icons'>
             <BarChartIcon />
           </ListItemIcon>
-          <ListItemText primary="Data" />
+          <ListItemText primary="Data" className="hide-on-mobile"/>
         </ListItemButton>
         </ListItem>
       </List>
@@ -191,6 +191,7 @@ const App = () => {
             <Route path="/list2" element={<TodoList2 />} />
             <Route path="/Time" element={<Time />} />
             <Route path="/PasswordGenerator" element={<PasswordGenerator />} />
+            <Route path="/data" element={<Data />} />
           </Routes>
         </Box>
       </Box>

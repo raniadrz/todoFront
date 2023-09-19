@@ -1,39 +1,16 @@
-import React from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
-import { Pie, Bar } from 'react-chartjs-2';
+import { ArcElement, BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
+import React, { useEffect, useState } from 'react';
+import { Bar, Pie } from 'react-chartjs-2';
+import TodoService from '../service';
 import '../styles/Data.scss';
-import TodoService from '../service'; 
-import { useState, useEffect } from 'react';
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
-
-// Bar Chart
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-// Data for completed todos
-const completedData = {
-  label: 'Completed',
-  data: [30, 40, 13, 7, 40, 5, 6], // Replace with your actual data
-  backgroundColor: 'rgba(75, 192, 192, 0.5)',
-};
-
-// Data for not completed todos
-const notCompletedData = {
-  label: 'Not Completed',
-  data: [0, 30, 5, 6, 30, 0, 6], // Replace with your actual data
-  backgroundColor: 'rgba(255, 99, 132, 0.5)',
-};
-
-const barChartData = {
-  labels,
-  datasets: [completedData, notCompletedData],
-};
 
 function Data() {
   //Δύο καταστάσεις (states) χρησιμοποιώντας τη συνάρτηση useState. Οι μεταβλητές completedData και notCompletedData αρχικοποιούνται με ένα κενό πίνακα.
   const [completedData, setCompletedData] = useState([]);
   const [notCompletedData, setNotCompletedData] = useState([]);
-  //Μια μεταβλητή labels που περιέχει έναν πίνακα με ένα κενό στοιχείο.
-  const labels = [''];
+  
   //Λήψη δεδομένων από το service.
   useEffect(() => {
     //Γίνεται μια ασύγχρονη (async) κλήση στην υπηρεσία TodoService.getTodo με τη χρήση της await.
@@ -74,9 +51,10 @@ function Data() {
 
 // PieChart
 const pieChartData = {
+  labels: ['Completed', 'Not Completed'],
   datasets: [
     {
-      labels,
+      label: ['Sum'],
       data: [completedData,notCompletedData],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -93,15 +71,34 @@ const pieChartData = {
   ],
 };
 
-//Options Pie and BarChart
+// Bar Chart
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
+// Data for completed + not todos
+const barChartData = {
+  labels,
+  datasets: [
+    {
+      label: 'Completed',
+      data: [30, 40, 13, 7, 40, 5, 6], // Replace with your actual data
+      backgroundColor: 'rgba(75, 192, 192, 0.5)',
+    },
+    {
+      label: 'Not Completed',
+      data: [10, 30, 5, 6, 30, 10, 6], // Replace with your actual data
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    },
+  ],
+};
+
+//Options Pie and BarChart
 //Mια μεταβλητή που περιέχει τις επιλογές και τις ρυθμίσεις για το γράφημα μπάρας.
 const pieChartOptions = {
   //Tο γράφημα θα προσαρμόζεται στο μέγεθος του παραθύρου του προγράμματος περιήγησης.
   responsive: true,
   //Tα plugins που θα χρησιμοποιηθούν για το γράφημα.
   plugins: {
-    //Oρίζει τη θέση του υπομνήματος (λεζάντας) στο γράφημα. 
+    //Oρίζει τη θέση του υπομνήματος (λεζάντας) στο γράφημα.
     legend: {
       position: 'bottom',
     },
@@ -110,7 +107,7 @@ const pieChartOptions = {
       display: true,
       text: 'Pie Chart',
       fontSize: 16,
-    },   
+    },
   },
 }
 

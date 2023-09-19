@@ -1,14 +1,14 @@
 import { Autorenew, FileCopy } from '@mui/icons-material';
 import {
-    Button,
-    Checkbox,
-    FormControlLabel,
-    Grid,
-    IconButton,
-    InputAdornment,
-    Slider,
-    TextField,
-    Typography,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Slider,
+  TextField,
+  Typography,
 } from '@mui/material';
 import React, { Component } from 'react';
 import "../styles/generator.scss"; // Import the CSS file
@@ -117,7 +117,7 @@ class PasswordGenerator extends Component {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <TextField className='password'
             label="Generated Password"
             value={password}
             fullWidth
@@ -142,16 +142,18 @@ class PasswordGenerator extends Component {
             color="primary"
             startIcon={<Autorenew />}
             onClick={this.generatePassword}
+            className="icon-button"
           >
-            Generate Password
+            <span className="button-text">Generate Password</span>
           </Button>
           <Button
             variant="contained"
             color="secondary"
             startIcon={<FileCopy />}
             onClick={this.copyToClipboard}
+            className="icon-button"
           >
-            Copy Password
+            <span className="button-text">Copy Password</span>
           </Button>
         </Grid>
       </Grid>

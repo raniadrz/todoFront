@@ -1,16 +1,10 @@
-/* PasswordGenerator.css */
-
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Center vertically on the screen */
-  }
-  
-  .password-generator {
-    background-color: #673AB7; /* Dark Purple Background */
-   
+    height: 100%; /* Center vertically on the screen */
+    cursor: pointer; /* Προσθέστε ένα δείκτη κέρσορα για να δείξετε ότι το κουμπί είναι κλικάρισμα */
   }
 
   .generator{
@@ -25,7 +19,43 @@
     display: flex;
     flex-wrap: wrap;
     padding: 30px 40px;
-   
-
 }
 
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+  .generator {
+   
+    display:grid;
+    width:fit-content;
+    align-items: center;
+    height: fit-content;
+    margin-left:5%;
+    margin-right: 5%;
+    margin-top: 10%;
+    margin-bottom: 5%;
+   
+  }
+  .button-text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto; /* Ορίστε το πλάτος σε "auto" για να ταιριάζει με το πλάτος του εικονιδίου */
+    height: auto; /* Ορίστε το ύψος σε "auto" για να ταιριάζει με το ύψος του εικονιδίου */
+    padding: 0; /* Καταργήστε το padding για να ταιριάζει με το εικονίδιο */
+    border: none; /* Καταργήστε το περίγραμμα του κουμπιού */
+    border-radius: 0; /* Καταργήστε την ακτίνα των γωνιών για να είναι τετράγωνο */
+
+   
+  }
+  .icon-button {
+    align-items: center;
+    justify-content: center;
+    width: 50%; /* Set to "auto" to match the icon's width */
+    height: 100%; /* Set to "auto" to match the icon's height */
+    padding: 0; /* Remove padding to match the icon's size */
+    border: none; /* Remove the button border */
+  }
+  
+  
+  
+}

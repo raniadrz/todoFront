@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Box, Button, Paper, TextField } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import AddIcon from '@mui/icons-material/Add';
+import CreateIcon from '@mui/icons-material/Create';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DoneIcon from '@mui/icons-material/Done';
-import CreateIcon from '@mui/icons-material/Create';
+import { Box, Button, Paper, TextField } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import TodoService from '../service';
 import "../styles/App.scss"; // Import the CSS file
 
@@ -29,7 +29,7 @@ function TodoDataG() {
     {
       field: 'completed',
       headerName: 'Completed',
-      width: 250,
+      width: 150,
       renderCell: (params) =>
         params.value ? <CheckIcon style={{ color: 'green' }} /> : <CloseIcon style={{ color: 'white' }} />,
     },
