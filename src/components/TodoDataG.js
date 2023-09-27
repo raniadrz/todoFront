@@ -4,34 +4,36 @@ import CloseIcon from '@mui/icons-material/Close';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DoneIcon from '@mui/icons-material/Done';
-import { Box, Button, Paper, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import TodoService from '../service';
-import "../styles/App.scss"; // Import the CSS file
+import "../styles/TodoDataG.scss";
 
 function TodoDataG() {
   const { register, handleSubmit, reset } = useForm();
   const [todoList, setTodoList] = useState([]);
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editedTaskDescription, setEditedTaskDescription] = useState('');
-
+  
   const columns = [
-    { field: 'newId', headerName: 'A/A', width: 90 },
+    { field: 'newId', headerName: 'A/A', width: 50 },
     {
       field: 'description',
       headerName: 'Description',
       flex: 1,
       width: 150,
-      editable: true,
+      editable: false,
     },
     {
       field: 'completed',
       headerName: 'Completed',
-      width: 150,
+      width:150,
       renderCell: (params) =>
-        params.value ? <CheckIcon style={{ color: 'green' }} /> : <CloseIcon style={{ color: 'white' }} />,
+      <div style={{ paddingLeft: '30px' }}>
+      {params.value ? <CheckIcon style={{ color: 'green' }} /> : <CloseIcon style={{ color: 'white' }} />}
+      </div>
     },
     {
       field: 'actions',
@@ -133,6 +135,7 @@ function TodoDataG() {
     TodoService.postTodo({
       completed: false,
       ...data,
+      
     })
       .then((resp) => {
         if (resp.status === 400) {
@@ -148,6 +151,7 @@ function TodoDataG() {
           return resp.json();
         }
       });
+     
   };
 
   //Edit todo
@@ -218,9 +222,8 @@ function TodoDataG() {
     <div className="form">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
-          component="div"
           sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
+            '& .MuiTextField-root': { m: 1, width: '25ch'},
           }}
           noValidate
           autoComplete="off"
@@ -233,21 +236,20 @@ function TodoDataG() {
               placeholder="To do..."
               variant="filled"
             />
-            <Button type="submit" variant="contained" endIcon={<AddIcon />} style={{ top: '17px' }}>
+            <Button className="button-56" role="button" type="submit" variant="contained" endIcon={<AddIcon />} style={{ top: '12px' }}>
               Add
             </Button>
           </div>
         </Box>
       </form>
-      <div className="dj">
-        <Paper style={{ height: 640, width: '100%' }}>
+      <div className="table">
+        <Box sx={{ height: 540 }}>
           <DataGrid
             rows={todoList}
             columns={columns}
-            pageSize={10}
             disableSelectionOnClick
           />
-        </Paper>
+        </Box>
       </div>
     </div>
   );

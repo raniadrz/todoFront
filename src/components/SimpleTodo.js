@@ -1,27 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import {
-  Box,
-  Button,
-  Table,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Paper,
-  TextField,
-  TableSortLabel,
-} from '@mui/material';
-import TodoService from '../service';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'; // Import Material Icons for "Previous" button
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward'; // Import Material Icons for "Next" button
+import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import AddIcon from '@mui/icons-material/Add';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DoneIcon from '@mui/icons-material/Done';
-
-
+import {
+  Box,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+  TextField,
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import TodoService from '../service';
+import "../styles/SimpleTodo.scss";
 function SimpleTodo() {
   const { register, handleSubmit } = useForm();
   const [todo, setTodolist] = useState([]);
@@ -30,7 +31,6 @@ function SimpleTodo() {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 7;
   const [sortOrder, setSortOrder] = useState('asc'); // State to track sorting order
-
   // Fetch Todos from the server
   const fetchToDos = () => {
     TodoService.getTodo({
@@ -168,6 +168,7 @@ function SimpleTodo() {
     setTodolist(sortedTodo);
   };
 
+
   return (
     <div className="form">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -187,20 +188,20 @@ function SimpleTodo() {
               placeholder="To do..."
               variant="filled"
             />
-            <Button type="submit" variant="contained" endIcon={<AddIcon />} style={{ top: '17px' }}>
+            <Button className="button-56" role="button" type="submit" variant="contained" endIcon={<AddIcon />} style={{ top: '12px' }}>
               Add
             </Button>
           </div>
         </Box>
       </form>
-      <div className="dj">
+      <div className="table">
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
-              <TableRow>
+              <TableRow className='head'>
                 <TableCell>ID</TableCell>
                 <TableCell>Description</TableCell>
-                <TableCell>
+                <TableCell> 
                   <TableSortLabel
                     active={true}
                     direction={sortOrder}
@@ -240,7 +241,7 @@ function SimpleTodo() {
                     <TableCell>
                       {editingTaskId === task.id ? (
                         <>
-                          <Button
+                          <Button className='buttons'
                             variant="contained"
                             style={{ backgroundColor: 'green', color: 'white' }}
                             onClick={() => handleSave(task.id)}
@@ -289,24 +290,23 @@ function SimpleTodo() {
           </Table>
         </TableContainer>
         <div className="pagination">
-          <Button
-            variant="contained"
+          <button
+            className="prev-button"
             onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
             disabled={currentPage === 0}
           >
-            Previous
-          </Button>
-          <Button
-            variant="contained"
+            <ArrowBackIcon /> {/* Use the ArrowBackIcon for "Previous" */}
+          </button>
+          <button
+            className="next-button"
             onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
             disabled={(currentPage + 1) * itemsPerPage >= todo.length}
           >
-            Next
-          </Button>
+            <ArrowForwardIcon /> {/* Use the ArrowForwardIcon for "Next" */}
+          </button>
         </div>
       </div>
     </div>
   );
 }
-
 export default SimpleTodo;

@@ -1,0 +1,52 @@
+    .head{
+        background-color: #f3e8fc;
+    }
+    .form{
+        margin-left: 1%;
+        margin-right: 1%;
+
+    }
+
+    /* Previous button styles */
+    .prev-button {
+        background-color: #e7d3f7; /* Blue color for the background */
+        padding: 8px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 2px solid #111 !important;
+        border-radius: 4px !important;
+        box-sizing: border-box;
+        color: #111 !important;
+        cursor: pointer;
+        margin-right: 1%;
+    }
+    
+    .prev-button:disabled {
+        background-color: #ccc; /* Grayed-out background for disabled state */
+        cursor: not-allowed;
+    }
+    
+    /* Next button styles */
+    .next-button {
+        background-color: #e7d3f7; /* Blue color for the background */
+        padding: 8px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 2px solid #111 !important;
+        border-radius: 4px !important;
+        box-sizing: border-box;
+        color: #111 !important;
+        cursor: pointer;
+    }
+    
+    .next-button:disabled {
+        background-color: #ccc; /* Grayed-out background for disabled state */
+        cursor: not-allowed;
+    }
+
+    .pagination{
+        margin-top: 0.3%;
+        margin-left: 89%;
+    }

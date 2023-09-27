@@ -13,7 +13,9 @@ $primary-font-family: 'Arial', sans-serif;
   font-family: $primary-font-family; /* Set font family */
 
 }
-
+.block{
+  margin-top: 0.2%;
+}
 /* Style for the overlay backdrop when the drawer is open */
 .MuiBackdrop-root {
   z-index: 0;
@@ -54,6 +56,7 @@ $primary-font-family: 'Arial', sans-serif;
     bottom: 20px; /* Adjust the value to control the logo's vertical position */
     left: 50%; /* Center the logo horizontally */
     transform: translateX(-50%);
+    mix-blend-mode: darken;
   }
 }
 .appBar
